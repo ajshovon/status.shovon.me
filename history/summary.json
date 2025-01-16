@@ -22,19 +22,19 @@
     "url": "$KVM_SG",
     "icon": "https://icons.duckduckgo.com/ip3/null.ico",
     "slug": "kvm-sg",
-    "status": "down",
-    "uptime": "99.79%",
-    "uptimeDay": "99.79%",
-    "uptimeWeek": "99.79%",
-    "uptimeMonth": "99.79%",
-    "uptimeYear": "99.79%",
-    "time": 247,
-    "timeDay": 247,
-    "timeWeek": 247,
-    "timeMonth": 247,
-    "timeYear": 247,
+    "status": "up",
+    "uptime": "98.48%",
+    "uptimeDay": "98.48%",
+    "uptimeWeek": "98.48%",
+    "uptimeMonth": "98.48%",
+    "uptimeYear": "98.48%",
+    "time": 242,
+    "timeDay": 242,
+    "timeWeek": 242,
+    "timeMonth": 242,
+    "timeYear": 242,
     "dailyMinutesDown": {
-      "2025-01-16": 0
+      "2025-01-16": 1
     }
   }
 ]
