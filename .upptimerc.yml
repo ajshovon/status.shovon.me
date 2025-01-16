@@ -12,9 +12,9 @@ status-website:
   cname: status.shovon.me
   # baseUrl: /your-repo-name
   logoUrl: https://raw.githubusercontent.com/upptime/upptime.js.org/master/static/img/icon.svg
-  name: "Status :: [.shovon]"
-  introTitle: "Status :: [.shovon]"
-  introMessage: Server Status Page for [.shovon]
+  name: "Status"
+  introTitle: "Status"
+  introMessage: Server Status Page for
   navbar:
     - title: Status
       href: /
