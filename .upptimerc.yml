@@ -4,7 +4,7 @@ repo: status.shovon.me # The name of this repository
 
 sites:
   - name: [.shovon]
-    url: https://shovon.me
+    url: https://google.com
 
 status-website:
   # Add your custom domain name, or remove the `cname` line if you don't have a domain
