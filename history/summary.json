@@ -10,11 +10,11 @@
     "uptimeWeek": "100.00%",
     "uptimeMonth": "100.00%",
     "uptimeYear": "99.99%",
-    "time": 173,
-    "timeDay": 221,
-    "timeWeek": 163,
-    "timeMonth": 159,
-    "timeYear": 173,
+    "time": 174,
+    "timeDay": 248,
+    "timeWeek": 180,
+    "timeMonth": 163,
+    "timeYear": 174,
     "dailyMinutesDown": {
       "2025-02-12": 19
     }
@@ -25,19 +25,17 @@
     "icon": "https://icons.duckduckgo.com/ip3/shovon.xyz.ico",
     "slug": "shovon-xyz",
     "status": "up",
-    "uptime": "99.99%",
-    "uptimeDay": "99.45%",
-    "uptimeWeek": "99.92%",
-    "uptimeMonth": "99.98%",
-    "uptimeYear": "99.99%",
-    "time": 1024,
-    "timeDay": 6987,
-    "timeWeek": 2839,
-    "timeMonth": 1370,
-    "timeYear": 1024,
-    "dailyMinutesDown": {
-      "2025-04-23": 8
-    }
+    "uptime": "100.00%",
+    "uptimeDay": "100.00%",
+    "uptimeWeek": "100.00%",
+    "uptimeMonth": "100.00%",
+    "uptimeYear": "100.00%",
+    "time": 1022,
+    "timeDay": 7048,
+    "timeWeek": 2862,
+    "timeMonth": 1372,
+    "timeYear": 1022,
+    "dailyMinutesDown": {}
   },
   {
     "name": "KVM SG",
@@ -51,9 +49,9 @@
     "uptimeMonth": "100.00%",
     "uptimeYear": "100.00%",
     "time": 213,
-    "timeDay": 178,
-    "timeWeek": 187,
-    "timeMonth": 206,
+    "timeDay": 227,
+    "timeWeek": 193,
+    "timeMonth": 205,
     "timeYear": 213,
     "dailyMinutesDown": {
       "2025-01-16": 1
