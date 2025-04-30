@@ -24,19 +24,19 @@
     "url": "https://shovon.xyz",
     "icon": "https://icons.duckduckgo.com/ip3/shovon.xyz.ico",
     "slug": "shovon-xyz",
-    "status": "down",
-    "uptime": "100.00%",
-    "uptimeDay": "99.99%",
-    "uptimeWeek": "100.00%",
-    "uptimeMonth": "100.00%",
-    "uptimeYear": "100.00%",
-    "time": 1019,
-    "timeDay": 1313,
-    "timeWeek": 2994,
-    "timeMonth": 1386,
-    "timeYear": 1019,
+    "status": "up",
+    "uptime": "99.97%",
+    "uptimeDay": "97.12%",
+    "uptimeWeek": "99.59%",
+    "uptimeMonth": "99.91%",
+    "uptimeYear": "99.97%",
+    "time": 1021,
+    "timeDay": 1247,
+    "timeWeek": 2812,
+    "timeMonth": 1380,
+    "timeYear": 1021,
     "dailyMinutesDown": {
-      "2025-04-30": 0
+      "2025-04-30": 41
     }
   },
   {
