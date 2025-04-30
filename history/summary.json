@@ -24,9 +24,9 @@
     "url": "https://shovon.xyz",
     "icon": "https://icons.duckduckgo.com/ip3/shovon.xyz.ico",
     "slug": "shovon-xyz",
-    "status": "up",
+    "status": "down",
     "uptime": "100.00%",
-    "uptimeDay": "100.00%",
+    "uptimeDay": "99.99%",
     "uptimeWeek": "100.00%",
     "uptimeMonth": "100.00%",
     "uptimeYear": "100.00%",
@@ -35,7 +35,9 @@
     "timeWeek": 2994,
     "timeMonth": 1386,
     "timeYear": 1019,
-    "dailyMinutesDown": {}
+    "dailyMinutesDown": {
+      "2025-04-30": 0
+    }
   },
   {
     "name": "KVM SG",
