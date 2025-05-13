@@ -11,9 +11,9 @@
     "uptimeMonth": "100.00%",
     "uptimeYear": "99.99%",
     "time": 182,
-    "timeDay": 90,
-    "timeWeek": 157,
-    "timeMonth": 203,
+    "timeDay": 104,
+    "timeWeek": 145,
+    "timeMonth": 204,
     "timeYear": 182,
     "dailyMinutesDown": {
       "2025-02-12": 19
@@ -25,16 +25,16 @@
     "icon": "https://icons.duckduckgo.com/ip3/shovon.xyz.ico",
     "slug": "shovon-xyz",
     "status": "up",
-    "uptime": "99.97%",
+    "uptime": "99.98%",
     "uptimeDay": "100.00%",
     "uptimeWeek": "100.00%",
     "uptimeMonth": "99.91%",
-    "uptimeYear": "99.97%",
-    "time": 1027,
-    "timeDay": 849,
-    "timeWeek": 1074,
-    "timeMonth": 1498,
-    "timeYear": 1027,
+    "uptimeYear": "99.98%",
+    "time": 1028,
+    "timeDay": 1169,
+    "timeWeek": 1111,
+    "timeMonth": 1514,
+    "timeYear": 1028,
     "dailyMinutesDown": {
       "2025-04-30": 41
     }
@@ -51,9 +51,9 @@
     "uptimeMonth": "100.00%",
     "uptimeYear": "100.00%",
     "time": 212,
-    "timeDay": 172,
-    "timeWeek": 209,
-    "timeMonth": 202,
+    "timeDay": 231,
+    "timeWeek": 218,
+    "timeMonth": 204,
     "timeYear": 212,
     "dailyMinutesDown": {
       "2025-01-16": 1
