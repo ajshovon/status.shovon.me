@@ -6,17 +6,17 @@
     "slug": "shovon-me",
     "status": "up",
     "uptime": "99.84%",
-    "uptimeDay": "78.78%",
-    "uptimeWeek": "96.97%",
-    "uptimeMonth": "99.30%",
+    "uptimeDay": "79.56%",
+    "uptimeWeek": "97.08%",
+    "uptimeMonth": "99.33%",
     "uptimeYear": "99.84%",
-    "time": 375,
+    "time": 373,
     "timeDay": 1814,
     "timeWeek": 1417,
     "timeMonth": 794,
-    "timeYear": 375,
+    "timeYear": 373,
     "dailyMinutesDown": {
-      "2025-06-03": 306,
+      "2025-06-03": 294,
       "2025-02-12": 19
     }
   },
@@ -27,9 +27,9 @@
     "slug": "shovon-xyz",
     "status": "down",
     "uptime": "99.55%",
-    "uptimeDay": "41.70%",
-    "uptimeWeek": "91.67%",
-    "uptimeMonth": "98.08%",
+    "uptimeDay": "41.06%",
+    "uptimeWeek": "91.58%",
+    "uptimeMonth": "98.06%",
     "uptimeYear": "99.55%",
     "time": 1072,
     "timeDay": 2004,
@@ -37,7 +37,7 @@
     "timeMonth": 1223,
     "timeYear": 1072,
     "dailyMinutesDown": {
-      "2025-06-03": 840,
+      "2025-06-03": 849,
       "2025-04-30": 41
     }
   },
@@ -47,18 +47,18 @@
     "icon": "https://icons.duckduckgo.com/ip3/null.ico",
     "slug": "kvm-sg",
     "status": "down",
-    "uptime": "99.58%",
-    "uptimeDay": "41.79%",
-    "uptimeWeek": "91.68%",
-    "uptimeMonth": "98.09%",
-    "uptimeYear": "99.58%",
+    "uptime": "99.57%",
+    "uptimeDay": "41.15%",
+    "uptimeWeek": "91.59%",
+    "uptimeMonth": "98.07%",
+    "uptimeYear": "99.57%",
     "time": 213,
     "timeDay": 213,
     "timeWeek": 215,
     "timeMonth": 214,
     "timeYear": 213,
     "dailyMinutesDown": {
-      "2025-06-03": 838,
+      "2025-06-03": 847,
       "2025-01-16": 1
     }
   }
