@@ -1,7 +1,7 @@
 url: https://shovon.me
-status: up
-code: 200
-responseTime: 102
-lastUpdated: 2025-06-19T13:58:01.449Z
+status: down
+code: 502
+responseTime: 1110
+lastUpdated: 2025-06-19T14:22:41.154Z
 startTime: 2025-01-17T18:15:14.491Z
 generator: Upptime <https://github.com/upptime/upptime>
