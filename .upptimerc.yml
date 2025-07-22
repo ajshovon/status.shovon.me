@@ -7,9 +7,12 @@ sites:
     url: https://shovon.me
   - name: shovon.xyz
     url: https://shovon.xyz
-  - name: VPS US
+  - name: VPS US1
     check: "tcp-ping"
     url: $VPS_US1
+  - name: VPS SG1
+    check: "tcp-ping"
+    url: $VPS_SG1
 status-website:
   # Add your custom domain name, or remove the `cname` line if you don't have a domain
   # Uncomment the `baseUrl` line if you don't have a custom domain and add your repo name there
