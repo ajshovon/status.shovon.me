@@ -31,11 +31,11 @@
     "icon": "https://icons.duckduckgo.com/ip3/shovon.xyz.ico",
     "slug": "shovon-xyz",
     "status": "up",
-    "uptime": "74.89%",
+    "uptime": "74.92%",
     "uptimeDay": "100.00%",
     "uptimeWeek": "100.00%",
-    "uptimeMonth": "25.79%",
-    "uptimeYear": "74.89%",
+    "uptimeMonth": "26.57%",
+    "uptimeYear": "74.92%",
     "time": 1092,
     "timeDay": 1397,
     "timeWeek": 1100,
@@ -99,9 +99,9 @@
     "url": "$VPS_US1",
     "icon": "https://icons.duckduckgo.com/ip3/null.ico",
     "slug": "vps-us-1",
-    "status": "up",
+    "status": "down",
     "uptime": "100.00%",
-    "uptimeDay": "100.00%",
+    "uptimeDay": "99.99%",
     "uptimeWeek": "100.00%",
     "uptimeMonth": "100.00%",
     "uptimeYear": "100.00%",
@@ -110,7 +110,9 @@
     "timeWeek": 44,
     "timeMonth": 44,
     "timeYear": 44,
-    "dailyMinutesDown": {}
+    "dailyMinutesDown": {
+      "2025-07-29": 0
+    }
   },
   {
     "name": "VPS SG1",
