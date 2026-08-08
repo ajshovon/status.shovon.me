@@ -40,7 +40,7 @@
       "2025-08-12": 29,
       "2025-10-31": 15,
       "2025-11-18": 105,
-      "2026-08-08": 1193,
+      "2026-08-08": 1212,
       "2026-08-07": 1440,
       "2026-08-06": 1440,
       "2026-08-05": 1440,
@@ -249,7 +249,7 @@
     "uptimeDay": "100.00%",
     "uptimeWeek": "100.00%",
     "uptimeMonth": "98.24%",
-    "uptimeYear": "98.86%",
+    "uptimeYear": "98.87%",
     "time": 29,
     "timeDay": 3,
     "timeWeek": 30,
@@ -269,14 +269,14 @@
     "url": "$VPS_SG1",
     "icon": "https://icons.duckduckgo.com/ip3/null.ico",
     "slug": "vps-sg-1",
-    "status": "down",
+    "status": "up",
     "uptime": "99.22%",
-    "uptimeDay": "90.74%",
-    "uptimeWeek": "94.32%",
-    "uptimeMonth": "98.69%",
+    "uptimeDay": "89.38%",
+    "uptimeWeek": "94.13%",
+    "uptimeMonth": "98.65%",
     "uptimeYear": "99.19%",
     "time": 249,
-    "timeDay": 252,
+    "timeDay": 258,
     "timeWeek": 270,
     "timeMonth": 269,
     "timeYear": 249,
@@ -321,7 +321,7 @@
       "2026-08-04": 160,
       "2026-08-05": 157,
       "2026-08-06": 55,
-      "2026-08-08": 133
+      "2026-08-08": 153
     }
   }
 ]
