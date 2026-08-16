@@ -25,11 +25,11 @@
     "icon": "https://icons.duckduckgo.com/ip3/shovon.xyz.ico",
     "slug": "shovon-xyz",
     "status": "down",
-    "uptime": "56.20%",
+    "uptime": "56.19%",
     "uptimeDay": "0.00%",
     "uptimeWeek": "0.00%",
     "uptimeMonth": "0.00%",
-    "uptimeYear": "44.13%",
+    "uptimeYear": "44.12%",
     "time": 1304,
     "timeDay": 0,
     "timeWeek": 0,
@@ -38,7 +38,7 @@
     "dailyMinutesDown": {
       "2025-10-31": 15,
       "2025-11-18": 105,
-      "2026-08-16": 851,
+      "2026-08-16": 901,
       "2026-08-15": 1440,
       "2026-08-14": 1440,
       "2026-08-13": 1440,
@@ -271,11 +271,11 @@
     "url": "$VPS_SG1",
     "icon": "https://icons.duckduckgo.com/ip3/null.ico",
     "slug": "vps-sg-1",
-    "status": "up",
+    "status": "down",
     "uptime": "99.18%",
-    "uptimeDay": "97.17%",
-    "uptimeWeek": "97.30%",
-    "uptimeMonth": "97.89%",
+    "uptimeDay": "98.17%",
+    "uptimeWeek": "97.44%",
+    "uptimeMonth": "97.92%",
     "uptimeYear": "99.13%",
     "time": 250,
     "timeDay": 237,
@@ -328,7 +328,7 @@
       "2026-08-11": 21,
       "2026-08-14": 86,
       "2026-08-15": 68,
-      "2026-08-16": 41
+      "2026-08-16": 26
     }
   }
 ]
