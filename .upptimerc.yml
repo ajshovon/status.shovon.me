@@ -5,11 +5,6 @@ repo: status.shovon.me # The name of this repository
 sites:
   - name: shovon.me
     url: https://shovon.me
-  - name: shovon.xyz
-    url: https://shovon.xyz
-  - name: VPS US1
-    check: "tcp-ping"
-    url: $VPS_US1
   - name: VPS SG1
     check: "tcp-ping"
     url: $VPS_SG1
