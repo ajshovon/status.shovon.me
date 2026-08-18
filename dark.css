@@ -1,8 +1,828 @@
+/* =========================================================================
+   Status :: [.shovon] — dark theme
+   -------------------------------------------------------------------------
+   This file is served at https://status.shovon.me/dark.css and pulled in via
+   `status-website.themeUrl` in .upptimerc.yml.
+
+   Load order in the generated <head> is:
+       client/*.css  ->  dark.css  ->  global.css
+   so global.css wins specificity *ties*. Selectors below are prefixed with
+   `body` / `#sapper` to out-specify it, and `!important` is used only where
+   global.css itself is `!important` (the status border colours).
+
+   The markup comes from @upptime/status-page and can't be edited, so the
+   structure targeted here is fixed:
+       nav > .container > a.logo + ul
+       main.container > header > h1 + p.lead
+       div.f.changed > h2 + form.f.r   (range picker)
+       section.live-status > article.{up,degraded,down}.link.graph
+       article.up                      (all-systems-operational banner)
+       article.down.link               (incidents)
+       footer
+   ========================================================================= */
+
+/* -------------------------------------------------------------------------
+   1. Design tokens
+   ---------------------------------------------------------------------- */
+
 :root {
-    --body-background-color: #232425;
-    --body-text-color: #f0ffff;
-    --card-background-color: #1b1c1d;
-    --nav-background-color: #1b1c1d;
-    --nav-border-bottom-color: #303030;
+  /* Neutral ramp — cool-tinted near-black through to foreground */
+  --c-bg: #0a0c0d;
+  --c-bg-elevated: #101314;
+  --c-surface: #121617;
+  --c-surface-2: #171c1e;
+  --c-surface-3: #1e2426;
+  --c-border: #212a2c;
+  --c-border-strong: #2c3639;
+
+  --c-fg: #e6edee;
+  --c-fg-muted: #93a1a4;
+  --c-fg-subtle: #6b787b;
+
+  /* Accent — mint, chosen to match the response-time graph PNGs */
+  --c-accent: #4fd1c5;
+  --c-accent-dim: #2b6d69;
+
+  /* Status */
+  --c-up: #35d399;
+  --c-up-bg: rgba(53, 211, 153, 0.08);
+  --c-degraded: #f5b643;
+  --c-degraded-bg: rgba(245, 182, 67, 0.08);
+  --c-down: #f8716f;
+  --c-down-bg: rgba(248, 113, 111, 0.09);
+
+  /* Shape + depth */
+  --radius-sm: 8px;
+  --radius: 12px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow: 0 4px 16px -4px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 12px 32px -8px rgba(0, 0, 0, 0.6);
+
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  --font-sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Inter, Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+    "Liberation Mono", monospace;
+
+  /* ---- Upptime's own theme variables (consumed by global.css) ---- */
+  --body-background-color: var(--c-bg);
+  --body-text-color: var(--c-fg);
+
+  --card-background-color: var(--c-surface);
+  --card-border-color: var(--c-border);
+
+  --code-color: var(--c-accent);
+  --code-background-color: var(--c-surface-3);
+
+  --up-border-left-color: var(--c-up);
+  --up-color-color: var(--c-fg);
+  --degraded-border-left-color: var(--c-degraded);
+  --degraded-color-color: var(--c-fg);
+  --down-border-left-color: var(--c-down);
+  --down-color-color: var(--c-fg);
+  --down-background-color: var(--c-surface-2);
+
+  --tag-color: #06100e;
+  --tag-up-background-color: var(--c-up);
+  --tag-down-background-color: var(--c-down);
+  --tag-degraded-background-color: var(--c-degraded);
+
+  --change-background-color: rgba(79, 209, 197, 0.16);
+
+  --nav-background-color: rgba(10, 12, 13, 0.72);
+  --nav-border-bottom-color: var(--c-border);
+  --nav-current-border-bottom-color: var(--c-accent);
+
+  --error-button-border-color: var(--c-border-strong);
+  --error-button-background-color: var(--c-surface-2);
+  --error-button-color: var(--c-fg);
+
+  --submit-button-background-color: var(--c-accent);
+  --submit-button-color: #06100e;
+  --submit-button-border-color: transparent;
+
+  /* Unused by the current template (global.css targets `article .graph`,
+     a descendant that never exists) — kept for forward compatibility. */
+  --graph-opacity: 1;
+  --graph-filter: none;
+
+  color-scheme: dark;
+}
+
+/* -------------------------------------------------------------------------
+   2. Base
+   ---------------------------------------------------------------------- */
+
+body {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  letter-spacing: -0.006em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  padding-bottom: 0;
+  /* Ambient wash so the flat near-black doesn't read as dead space */
+  background-image: radial-gradient(
+      1100px 520px at 50% -12%,
+      rgba(79, 209, 197, 0.07),
+      transparent 70%
+    ),
+    radial-gradient(760px 380px at 88% 4%, rgba(53, 211, 153, 0.05), transparent 65%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+body .container {
+  max-width: 880px;
+  padding: 0 1.5rem;
+}
+
+#sapper h1,
+#sapper h2,
+#sapper h3,
+#sapper h4 {
+  letter-spacing: -0.02em;
+}
+
+#sapper a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Prose links (incident bodies) keep an underline for legibility.
+   Buttons are anchors too, so they're excluded here. */
+#sapper main p > a:not(.submit-button):not(.error-button),
+#sapper main dd a:not(.submit-button):not(.error-button),
+#sapper main li a:not(.submit-button):not(.error-button) {
+  color: var(--c-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--c-accent-dim);
+  transition: text-decoration-color 0.15s var(--ease);
+}
+
+#sapper main p > a:not(.submit-button):not(.error-button):hover,
+#sapper main dd a:not(.submit-button):not(.error-button):hover,
+#sapper main li a:not(.submit-button):not(.error-button):hover {
+  text-decoration-color: var(--c-accent);
+}
+
+#sapper code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  padding: 0.15em 0.4em;
+  border-radius: 6px;
+  border: 1px solid var(--c-border);
+}
+
+/* -------------------------------------------------------------------------
+   3. Nav — sticky, translucent
+   ---------------------------------------------------------------------- */
+
+#sapper nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  margin-bottom: 3.5rem;
+  padding: 0 1.5rem;
+  font-weight: 400;
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  backdrop-filter: saturate(180%) blur(14px);
+  scrollbar-width: none;
+}
+
+#sapper nav::-webkit-scrollbar {
+  display: none;
+}
+
+#sapper nav .container {
+  padding: 0;
+  min-height: 60px;
+  gap: 1rem;
+}
+
+/* Logo lockup */
+#sapper nav .logo {
+  float: none;
+  margin-right: 1.5rem;
+  padding: 0;
+  gap: 0.7rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  border-radius: var(--radius-sm);
+  transition: opacity 0.15s var(--ease);
+}
+
+#sapper nav .logo:hover {
+  opacity: 0.75;
+}
+
+#sapper nav .logo img {
+  height: 1.75rem;
+  width: 1.75rem;
+  margin-right: 0;
+  border-radius: 7px;
+  object-fit: contain;
+}
+
+/* Nav links become compact pills */
+#sapper nav ul {
+  gap: 0.25rem;
+}
+
+#sapper nav ul a {
+  position: relative;
+  padding: 0.45rem 0.8rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  color: var(--c-fg-muted);
+  transition: color 0.15s var(--ease), background-color 0.15s var(--ease);
+}
+
+#sapper nav ul a:hover {
+  color: var(--c-fg);
+  background: var(--c-surface-2);
+}
+
+/* Replace the stock 2px bottom border with a contained active pill */
+#sapper nav ul a[aria-current] {
+  color: var(--c-fg);
+  background: var(--c-surface-3);
+  border-bottom: 0;
+  box-shadow: inset 0 0 0 1px var(--c-border-strong);
+}
+
+/* -------------------------------------------------------------------------
+   4. Page header
+   ---------------------------------------------------------------------- */
+
+#sapper main header {
+  margin-bottom: 2.75rem;
+}
+
+#sapper main header h1 {
+  font-size: clamp(2rem, 6vw, 2.9rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  margin-bottom: 0.4rem;
+  background: linear-gradient(180deg, var(--c-fg) 0%, #9fb0b3 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+#sapper main header p.lead {
+  font-size: 1.05rem;
+  color: var(--c-fg-muted);
+  margin: 0;
+  max-width: 60ch;
+}
+
+/*  `introTitle: "Status :: [.shovon]"` is parsed as Markdown by snarkdown, so
+    the bracketed text becomes <a href="undefined">. Neutralise the dead link
+    until the config is fixed. !important is needed because the prose-link
+    rule above out-specifies this one. */
+#sapper main a[href="undefined"] {
+  color: inherit !important;
+  cursor: default;
+  pointer-events: none;
+  text-decoration: none !important;
+}
+
+/* -------------------------------------------------------------------------
+   5. Section headings
+   ---------------------------------------------------------------------- */
+
+#sapper main h2 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--c-fg-muted);
+  margin: 0;
+}
+
+#sapper main section + h2,
+#sapper main h2.svelte-18y4uo2 {
+  margin-top: 3rem;
+}
+
+/* Date separators above incident cards */
+#sapper main h3 {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--c-fg-subtle);
+  opacity: 1;
+  margin: 2rem 0 0.75rem;
+}
+
+#sapper main h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.3rem;
+}
+
+/* -------------------------------------------------------------------------
+   6. Range picker — stock radios rebuilt as a segmented control
+   ---------------------------------------------------------------------- */
+
+#sapper .f.changed {
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+#sapper form.r {
+  gap: 2px;
+  padding: 3px;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: 10px;
+  box-shadow: var(--shadow-sm);
+}
+
+#sapper form.r label {
+  display: block;
+  margin-left: 0 !important;
+  padding: 0.3rem 0.7rem;
+  border-radius: 7px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--c-fg-muted);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: color 0.15s var(--ease), background-color 0.15s var(--ease);
+}
+
+#sapper form.r label:hover {
+  color: var(--c-fg);
+  background: var(--c-surface-2);
+}
+
+#sapper form.r input:checked + label {
+  font-weight: 600 !important;
+  color: var(--c-fg);
+  background: var(--c-surface-3);
+  box-shadow: inset 0 0 0 1px var(--c-border-strong), var(--shadow-sm);
+}
+
+#sapper form.r input:focus-visible + label {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 2px;
+}
+
+/* -------------------------------------------------------------------------
+   7. Cards
+   ---------------------------------------------------------------------- */
+
+#sapper article {
+  padding: 1.15rem 1.35rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--c-border);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: border-color 0.18s var(--ease), transform 0.18s var(--ease),
+    box-shadow 0.18s var(--ease), background-color 0.18s var(--ease);
+}
+
+#sapper article + article {
+  margin-top: 0.6rem;
+}
+
+#sapper article + h3 {
+  margin-top: 2rem;
+}
+
+#sapper article.link:hover {
+  transform: translateY(-1px);
+  border-color: var(--c-border-strong);
+  box-shadow: var(--shadow);
+}
+
+/* Status accent: the stock 0.2rem full-height left border becomes an inset,
+   rounded bar. global.css sets border-left-color with !important, so these
+   need both !important and a higher-specificity selector to land. */
+#sapper article.up,
+#sapper article.degraded,
+#sapper article.down {
+  position: relative;
+  border-left: 1px solid var(--c-border) !important;
+  padding-left: 1.65rem;
+}
+
+#sapper article.up::before,
+#sapper article.degraded::before,
+#sapper article.down::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.9rem;
+  bottom: 0.9rem;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: var(--c-fg-subtle);
+}
+
+#sapper article.up::before {
+  background: var(--c-up);
+  box-shadow: 0 0 12px -1px var(--c-up);
+}
+
+#sapper article.degraded::before {
+  background: var(--c-degraded);
+  box-shadow: 0 0 12px -1px var(--c-degraded);
+}
+
+#sapper article.down::before {
+  background: var(--c-down);
+  box-shadow: 0 0 12px -1px var(--c-down);
+}
+
+/* Tint the card body for states that need attention */
+#sapper article.degraded {
+  background: linear-gradient(90deg, var(--c-degraded-bg), transparent 55%),
+    var(--c-surface);
+}
+
+#sapper article.down {
+  background: linear-gradient(90deg, var(--c-down-bg), transparent 55%),
+    var(--c-surface);
+}
+
+#sapper article.down-active {
+  border-color: rgba(248, 113, 111, 0.32) !important;
+}
+
+/* "All systems operational" banner — the only .up article that is neither a
+   link nor a graph card. Given hero treatment. */
+#sapper article.up:not(.link):not(.graph) {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 1.35rem 1.5rem 1.35rem 1.65rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  background: linear-gradient(90deg, var(--c-up-bg), transparent 60%),
+    var(--c-surface);
+  border-color: rgba(53, 211, 153, 0.22);
+}
+
+/* -------------------------------------------------------------------------
+   8. Live status cards + graph watermark
+   ---------------------------------------------------------------------- */
+
+/* The response-time PNG is painted as the article's own background at full
+   strength, directly behind the text. Move it to a pseudo-element so it can
+   be dimmed and faded out from the left. */
+#sapper article.graph {
+  background-image: none !important;
+}
+
+#sapper article.graph::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: var(--background);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center right;
+  opacity: 0.3;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to right, transparent 6%, #000 62%);
+  mask-image: linear-gradient(to right, transparent 6%, #000 62%);
+  transition: opacity 0.18s var(--ease);
+}
+
+#sapper article.graph:hover::after {
+  opacity: 0.42;
+}
+
+/* Keep card content above the watermark */
+#sapper article.graph > * {
+  position: relative;
+  z-index: 1;
+}
+
+#sapper article.graph h4 {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 1.05rem;
+  margin-bottom: 0.45rem;
+}
+
+#sapper article.graph h4 .icon {
+  height: 1.15rem;
+  width: 1.15rem;
+  margin-right: 0;
+  border-radius: 5px;
+  transform: none;
+  object-fit: contain;
+}
+
+/* Uptime / response-time lines sit side by side instead of stacking */
+#sapper article.graph > div {
+  display: inline-block;
+  margin-right: 1.5rem;
+  font-size: 0.875rem;
+  color: var(--c-fg-muted);
+}
+
+/* Metric values */
+#sapper .data {
+  padding: 0.1rem 0.4rem;
+  border-radius: 6px;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+  font-weight: 600;
+  color: var(--c-fg);
+  background: var(--c-surface-3);
+  transition: background-color 0.3s var(--ease), color 0.3s var(--ease);
+}
+
+/* Flash on range change (global.css drives this via .changed + section) */
+#sapper .changed + section .data {
+  color: var(--c-accent);
+}
+
+/* -------------------------------------------------------------------------
+   9. Incident cards
+   ---------------------------------------------------------------------- */
+
+#sapper article .f {
+  gap: 0.75rem 1.25rem;
+}
+
+#sapper article .f.r a {
+  display: inline-block;
+  padding: 0.32rem 0.7rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--c-fg-muted);
+  background: var(--c-surface-3);
+  border: 1px solid var(--c-border);
+  white-space: nowrap;
+  transition: color 0.15s var(--ease), border-color 0.15s var(--ease);
+}
+
+#sapper article.link:hover .f.r a {
+  color: var(--c-fg);
+  border-color: var(--c-border-strong);
+}
+
+#sapper article .f > div:first-child > div {
+  font-size: 0.875rem;
+  color: var(--c-fg-muted);
+}
+
+/* -------------------------------------------------------------------------
+   10. Tags
+   ---------------------------------------------------------------------- */
+
+#sapper .tag {
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-top: 0;
+  margin-left: 0.6rem;
+  vertical-align: middle;
+}
+
+/* -------------------------------------------------------------------------
+   11. Definition lists (incident detail pages)
+   ---------------------------------------------------------------------- */
+
+/* dt/dd alternate as direct children, so a fixed 2-column grid keeps every
+   term aligned with its own definition. */
+#sapper main dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  align-items: baseline;
+  gap: 0.6rem 1.5rem;
+  padding: 1.15rem 1.35rem;
+  margin-bottom: 2rem;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+}
+
+#sapper main dl dt {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--c-fg-subtle);
+}
+
+#sapper main dl dd {
+  margin: 0;
+  font-weight: 500;
+}
+
+/* -------------------------------------------------------------------------
+   12. Buttons
+   ---------------------------------------------------------------------- */
+
+#sapper .submit-button,
+#sapper a.error-button {
+  display: inline-block;
+  padding: 0.55rem 1.1rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.3;
+  text-decoration: none;
+  border-width: 1px;
+  border-style: solid;
+  cursor: pointer;
+  transition: opacity 0.15s var(--ease), border-color 0.15s var(--ease);
+}
+
+#sapper .submit-button {
+  color: var(--submit-button-color);
+}
+
+#sapper a.error-button {
+  color: var(--error-button-color);
+}
+
+#sapper .submit-button:hover {
+  opacity: 0.88;
+}
+
+#sapper a.error-button:hover {
+  border-color: var(--c-border-strong);
+}
+
+/* -------------------------------------------------------------------------
+   13. Loading spinner
+   ---------------------------------------------------------------------- */
+
+#sapper .loading {
+  display: flex;
+  justify-content: center;
+  padding: 2.5rem 0;
+}
+
+#sapper .loading svg {
+  stroke: var(--c-accent);
+  opacity: 0.65;
+}
+
+/* -------------------------------------------------------------------------
+   14. Footer
+   ---------------------------------------------------------------------- */
+
+#sapper footer {
+  margin-top: 5rem;
+  padding: 2rem 1.5rem 3rem;
+  border-top: 1px solid var(--c-border);
+  opacity: 1;
+  font-size: 0.85rem;
+  color: var(--c-fg-subtle);
+}
+
+#sapper footer a {
+  color: var(--c-fg-muted);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: transparent;
+  transition: color 0.15s var(--ease), text-decoration-color 0.15s var(--ease);
+}
+
+#sapper footer a:hover {
+  color: var(--c-accent);
+  text-decoration-color: currentColor;
+}
+
+/* -------------------------------------------------------------------------
+   15. Focus, selection, scrollbar
+   ---------------------------------------------------------------------- */
+
+#sapper a:focus-visible,
+#sapper button:focus-visible,
+#sapper label:focus-visible,
+#sapper input:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+::selection {
+  background: rgba(79, 209, 197, 0.28);
+  color: var(--c-fg);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--c-border-strong) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--c-border-strong);
+  border: 2px solid var(--c-bg);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--c-fg-subtle);
+}
+
+/* -------------------------------------------------------------------------
+   16. Responsive
+   ---------------------------------------------------------------------- */
+
+@media (max-width: 640px) {
+  body .container {
+    padding: 0 1.1rem;
   }
-  /* . . . */
+
+  #sapper nav {
+    padding: 0 1.1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  #sapper nav .container {
+    min-height: 54px;
+  }
+
+  #sapper nav .logo {
+    margin-right: 1rem;
+    font-size: 0.875rem;
+  }
+
+  #sapper .f.changed {
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  /* Once the control wraps below the heading, span the row with equal-width
+     segments rather than leaving the active pill floating in whitespace. */
+  #sapper form.r {
+    width: 100%;
+  }
+
+  #sapper form.r > div {
+    flex: 1;
+  }
+
+  #sapper form.r label {
+    padding: 0.35rem 0.4rem;
+    text-align: center;
+  }
+
+  /* The sparkline competes with text on narrow cards */
+  #sapper article.graph::after {
+    opacity: 0.13;
+    -webkit-mask-image: linear-gradient(to right, transparent 25%, #000 85%);
+    mask-image: linear-gradient(to right, transparent 25%, #000 85%);
+  }
+
+  #sapper article.graph > div {
+    display: block;
+    margin-right: 0;
+  }
+}
+
+/* -------------------------------------------------------------------------
+   17. Motion preferences
+   ---------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  #sapper *,
+  #sapper *::before,
+  #sapper *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  #sapper article.link:hover {
+    transform: none;
+  }
+}
