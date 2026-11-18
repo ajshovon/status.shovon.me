@@ -11,13 +11,11 @@
     "uptimeMonth": "100.00%",
     "uptimeYear": "99.97%",
     "time": 247,
-    "timeDay": 102,
-    "timeWeek": 225,
-    "timeMonth": 300,
-    "timeYear": 193,
-    "dailyMinutesDown": {
-      "2025-11-18": 133
-    }
+    "timeDay": 170,
+    "timeWeek": 235,
+    "timeMonth": 303,
+    "timeYear": 192,
+    "dailyMinutesDown": {}
   },
   {
     "name": "VPS SG1",
